@@ -52,3 +52,53 @@ exports.test = moduleTestFunction;
 
 - 직접 제어할 수 없는 작업이 완료되기 전에 제어권을 넘겨주는 경우를 말한다.
 - 호출된 함수에서 I/O 작업등을 요청했을 경우 I/O 작업의 처리여부와 관계없이 바로 다음 작업을 할수있음.
+
+## 코어 모듈
+
+```javascript
+파일시스템 모듈 ('fs')
+경로 모듈('path')
+
+const fs = require('fs'); //.. ('path')
+```
+
+```javascript
+//rootdir
+const path = require("path");
+
+module.exports = path.dirname(process.mainModule.filename);
+
+
+
+//원랜
+const path = require('path')
+
+router.get ( ...)=>{
+  ...
+  res.sendFile(path.join(__dirname, '...')) // 이런형태를
+}
+
+// 이후
+const rootdir = require('../rootdir')
+router.get(...)=>{
+  ..
+  res.sendFile(path.join(rootdir,'..'))
+}
+
+```
+
+### controlelrs
+
+```javascript
+
+exports.get~~ = (req,res)=>{
+  ...
+  ...
+}
+
+//shop.js
+const productController =require('../경로 ')
+
+router.get('url',productController);
+
+```
