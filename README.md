@@ -102,3 +102,79 @@ const productController =require('../경로 ')
 router.get('url',productController);
 
 ```
+
+### DB
+
+```javascript
+// get the client
+const mysql = require('mysql2');
+
+// create the connection to database
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'root',
+  database: 'test'
+});
+
+// simple query
+connection.query(
+  'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
+  function(err, results, fields) {
+    console.log(results); // results contains rows returned by server
+    console.log(fields); // fields contains extra meta data about results, if available
+  }
+);
+
+// with placeholder
+connection.query(
+  'SELECT * FROM `table` WHERE `name` = ? AND `age` > ?',
+['',int]
+  function(err, results) {
+    console.log(results);
+  }
+);
+```
+
+### sequelize
+
+```javascript
+//product.js
+const Sequelize = require("sequelize");
+
+const sequelize = require("../utils/database");
+
+const Product = sequelize.define("product", {
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    allowNull: true,
+    primaryKey: true,
+  },
+  title: Sequelize.STRING,
+  price: {
+    type: Sequelize.DOUBLE,
+    allowNull: false,
+  },
+  imageUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  description: {
+    type: sequelize.STRING,
+    allowNull: false,
+  },
+});
+
+module.exports = Product;
+
+//db
+
+const Sequelize = require("sequelize");
+
+const sequelize = new Sequelize("데이터베이스이름", "계정", "비밀번호", {
+  dialect: "", //mysql
+  host: "", // localhost
+});
+
+module.exports = sequelize;
+```
