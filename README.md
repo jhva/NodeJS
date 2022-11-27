@@ -116,6 +116,7 @@ const connection = mysql.createConnection({
   database: 'test'
 });
 
+connection.execute()
 // simple query
 connection.query(
   'SELECT * FROM `table` WHERE `name` = "Page" AND `age` > 45',
